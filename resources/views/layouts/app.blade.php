@@ -19,13 +19,19 @@
         <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/template">Template <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/curso">Cursos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/pagina2">Página 2</a>
+                    <a class="nav-link" href="/disciplina">Disciplinas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/pagina3">Página 3</a>
+                    <a class="nav-link" href="/aluno">Alunos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/professor">Professores</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/turma">Turmas</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">

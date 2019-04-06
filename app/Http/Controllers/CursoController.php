@@ -25,7 +25,8 @@ class CursoController extends Controller
      */
     public function create()
     {
-        //
+        $curso = new Curso();
+        return view('curso.formulario', compact('curso'));
     }
 
     /**
@@ -36,7 +37,17 @@ class CursoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $curso = new Curso();
+
+        // Em caso de alterção
+        if($request->id){
+            $curso = $curso->find($request->id);
+        }
+
+        $curso->fill($request->all());
+        $curso->save();
+
+        return redirect('curso');
     }
 
     /**
@@ -58,7 +69,8 @@ class CursoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $curso = Curso::find($id);
+        return view('curso.formulario', compact('curso'));
     }
 
     /**
@@ -81,6 +93,8 @@ class CursoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Curso::find($id)->delete();
+
+        return redirect('curso');
     }
 }

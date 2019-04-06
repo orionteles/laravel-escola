@@ -57,7 +57,12 @@ class DisciplinaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $disciplina = Disciplina::find($id);
+
+        $var = $disciplina->curso;
+
+        echo '<pre>'; print_r($var); die;
+        
     }
 
     /**

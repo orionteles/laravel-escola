@@ -20,7 +20,7 @@
                 </td>
                 <td>{{$disciplina->id}}</td>
                 <td>{{$disciplina->nome}}</td>
-                <td>{{$disciplina->curso_id}}</td>
+                <td>{{$disciplina->curso->nome}}</td>
             </tr>
         @endforeach
     </table>
