@@ -25,7 +25,8 @@ class AlunoController extends Controller
      */
     public function create()
     {
-        //
+        $aluno = new Aluno();
+        return view('aluno.formulario', compact('aluno'));
     }
 
     /**
@@ -36,7 +37,17 @@ class AlunoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $aluno = new Aluno();
+
+        // Em caso de alterção
+        if($request->id){
+            $aluno = $aluno->find($request->id);
+        }
+
+        $aluno->fill($request->all());
+        $aluno->save();
+
+        return redirect('aluno');
     }
 
     /**
@@ -58,7 +69,8 @@ class AlunoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $aluno = Aluno::find($id);
+        return view('aluno.formulario', compact('aluno'));
     }
 
     /**
@@ -81,6 +93,21 @@ class AlunoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Aluno::find($id)->delete();
+
+        return redirect('aluno');
+    }
+
+    public function verificarEmail($email)
+    {
+        $qtd = Aluno::where('email', $email)->count();
+        $mensagem = $qtd ?
+            "Já existe um registro com o e-mail {$email}" :
+            'Não existe registro com o email informado';
+
+        return [
+            'existe' => (bool) $qtd,
+            'mensagem' => $mensagem,
+        ];
     }
 }

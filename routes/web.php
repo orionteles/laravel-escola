@@ -26,8 +26,16 @@ Route::get('/orion', function () {
 });
 
 Route::resource('/curso', 'CursoController');
+Route::get('/curso/{id}/destroy', 'CursoController@destroy');
+
 Route::resource('/disciplina', 'DisciplinaController');
 Route::resource('/aluno', 'AlunoController');
+
+Route::get('/aluno/{id}/destroy', 'AlunoController@destroy');
+Route::get('/aluno/verificar-email/{email}', 'AlunoController@verificarEmail');
+
+
+
 Route::resource('/professor', 'ProfessorController');
 Route::resource('/turma', 'TurmaController');
 

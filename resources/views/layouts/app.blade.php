@@ -6,6 +6,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
 
 </head>
 <body class="bg-light">
