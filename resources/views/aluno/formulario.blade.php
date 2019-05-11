@@ -13,6 +13,7 @@
                 <div class="form-group">
                     <label for="nome">Nome</label>
                     <input type="text" class="form-control" name="nome" id="nome" value="{{$aluno->nome}}">
+                    <span id="mensagem-nome"></span>
                 </div>
 
                 <div class="form-group">
@@ -23,6 +24,7 @@
                 <div class="form-group">
                     <label for="email">E-mail</label>
                     <input type="text" class="form-control" name="email" id="email" value="{{$aluno->email}}">
+                    <span id="mensagem-email" style="color: red;"></span>
                 </div>
 
                 <div class="form-group">
@@ -46,13 +48,23 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="uf">UF</label>
-                    <input type="text" class="form-control" name="uf" id="uf" value="{{$aluno->uf}}">
+                    <label for="uf_id">UF</label>
+                    <select name="uf_id" id="uf_id" class="form-control">
+                        <option value="">Selecione</option>
+                        @foreach($ufs as $uf)
+                            <option value="{{$uf->id}}">{{$uf->sigla . ' - ' . $uf->nome}}</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="municipio">Município</label>
-                    <input type="text" class="form-control" name="municipio" id="municipio" value="{{$aluno->municipio}}">
+                    <label for="municipio_id">Município</label>
+                    <select name="municipio_id" id="municipio_id" class="form-control">
+                        <option value="">Selecione</option>
+                        @foreach($municipios as $municipio)
+                            <option value="{{$municipio->id}}">{{$municipio->nome}}</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="form-group">
@@ -87,9 +99,35 @@
 
             $('#email').change(function(){
                 $.ajax({
-                    url: ''
-                })
-            })
+                    url: '/aluno/verificar-email/' + $('#email').val(),
+                    success: function (dados) {
+                        if(dados.existe){
+                            $('#mensagem-email').html(dados.mensagem);
+                            $('#email').val('')
+                        }
+                    }
+                });
+            });
+
+            $('#nome').change(function(){
+                $('#mensagem-nome').load('/aluno/verificar-nome/' + $('#nome').val())
+            });
+
+            $('#uf_id').change(function(){
+
+                $.ajax({
+                    url: '/municipio/recuperar-por-uf/' + $('#uf_id').val(),
+                    success: function (dados) {
+                        $('#municipio_id').html('<option value="">Selecione</option>');
+
+                        dados.forEach(function(obj){
+                            $('#municipio_id').append('<option value="' + obj.id + '">' + obj.nome + '</option>');
+                        })
+                    }
+                });
+            });
+
+
         });
     </script>
 

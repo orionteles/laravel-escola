@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Aluno;
+use App\Municipio;
+use App\Uf;
 use Illuminate\Http\Request;
 
 class AlunoController extends Controller
@@ -26,7 +28,10 @@ class AlunoController extends Controller
     public function create()
     {
         $aluno = new Aluno();
-        return view('aluno.formulario', compact('aluno'));
+        $ufs = Uf::all();
+        $municipios = Municipio::all();
+
+        return view('aluno.formulario', compact('aluno', 'ufs', 'municipios'));
     }
 
     /**
@@ -110,4 +115,22 @@ class AlunoController extends Controller
             'mensagem' => $mensagem,
         ];
     }
+
+    public function verificarNome($nome)
+    {
+        $qtd = Aluno::where('nome', $nome)->count();
+        $mensagem = $qtd ?
+            "Existem {$qtd} alunos com o nome {$nome}" :
+            'Não existe nenhum aluno com seu nome';
+
+        return $mensagem;
+    }
+
+    public function listar($nome = null)
+    {
+        $alunos = Aluno::where('nome', 'like', "%{$nome}%")->get();
+        return view('aluno.listagem', compact('alunos'));
+    }
+
+
 }

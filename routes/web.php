@@ -29,12 +29,14 @@ Route::resource('/curso', 'CursoController');
 Route::get('/curso/{id}/destroy', 'CursoController@destroy');
 
 Route::resource('/disciplina', 'DisciplinaController');
+Route::get('/aluno/listar/{nome}', 'AlunoController@listar');
 Route::resource('/aluno', 'AlunoController');
 
 Route::get('/aluno/{id}/destroy', 'AlunoController@destroy');
 Route::get('/aluno/verificar-email/{email}', 'AlunoController@verificarEmail');
+Route::get('/aluno/verificar-nome/{nome}', 'AlunoController@verificarNome');
 
-
+Route::get('/municipio/recuperar-por-uf/{uf_id}', 'MunicipioController@recuperarPorUf');
 
 Route::resource('/professor', 'ProfessorController');
 Route::resource('/turma', 'TurmaController');
